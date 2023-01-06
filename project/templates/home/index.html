@@ -1,0 +1,109 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block body %}
+<div class="container-fluid bg-light mt-4 sagar">
+    <div class="col-12 d-flex justify-content-between flex-wrap">
+        <div class="col-12 col-md-2 px-2 mb-4 mt-lg-5">
+        </div>
+        <!-- LYRICS AND CHORDS  -->
+        <div class="col-12 col-md-8 mid_column d-flex flex-column">
+            <h1 class="ms-3 chordian fw-bold d-inline py-4">
+                <span class="py-3 px-3 shadow" style="background-color: #416f72;">
+                    <span class="shadow-sm px-2 py-1">C</span>
+                    <span class="shadow-sm px-2 py-1">H</span>
+                    <span class="shadow-sm px-2 py-1">O</span>
+                    <span class="shadow-sm px-2 py-1">R</span>
+                    <span class="shadow-sm px-2 py-1">D</span>
+                    <span class="shadow-sm px-2 py-1">S</span>
+                </span>
+            </h1>
+            {% for i in allChords %}
+            <div class="box bg-light m-3"
+                style="box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.39); background-color: rgb(255, 255, 255) !important;">
+                <!-- box-header  -->
+                <h1 class="ps-4 box_header py-1 pt-2 fw-bold" style="background-color: #416f72; color: white; ">
+                    {{ i.title_name |truncatewords:7 }} <span class="fw-bold">-</span> <span class="text-capitalize">{{ i.singer | truncatewords:4}}</span>
+                </h1>
+                <hr class="w-100" style="margin-top: -.4rem;">
+                <!-- end box header  -->
+
+                <!-- box-body  -->
+                <div class="box_body px-3 pb-2 ms-2">
+                    <li><a href="{% url 'content' i.id %}" style="padding-right:5rem" class="text-lowercase">
+                        {{ i.html_description|truncatewords:15 }}</a></li>
+                </div>
+
+                <!-- end-box-body  -->
+            </div>
+            {% endfor %}
+
+<nav aria-label="..." class="ps-3">
+    <ul class="pagination">
+        {% if allChords.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="/?page=1" style="color: #416f72;">First</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" style="color: #416f72;" href="/?page={{ allChords.previous_page_number }}">Previous</a>
+        </li>
+        {% endif %}
+
+        <!-- LOOP FOR PAGE  -->
+        {% for i in totalpagelist %}
+        <li class="page-item"><a class="page-link" style="color: #416f72;" href="/?page={{ i }}">{{i}}</a></li>
+        {% endfor %}
+
+        {% if allChords.has_next %}
+        <li class="page-item">
+            <a class="page-link" style="color: #416f72;" href="/?page={{ allChords.next_page_number }}">Next</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="/?page={{ last_page }}" style="color: #416f72;">Last</a>
+        </li>
+     
+        {% endif %}
+    </ul>
+</nav>
+    
+        </div>
+        <!-- MOST POPULAR  -->
+        <div class="col-12 col-md-2 px-2 right_column d-flex flex-column">
+            <h2 class="text-center fw-bolder py-2 "
+                style="margin-top: 2rem; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; color: #416f72;">
+                <hr class="w-75 mx-auto" style="color: black;">
+
+                P O P U L A R
+
+                <hr class="w-75 mx-auto " style="color: black;">
+            </h2>
+            <!-- FOR POPULAR CATEGORY  -->
+            {% for i in popular %}
+            <div class="box px-2 py-1 mb-3" style="box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.479);">
+                <!-- box-header  -->
+                <div class="header-container px-3">
+                    <h6 class="py-1 box_header text-capitalize fw-bold text-center" style="background-color:#416f72; color: white; "> 
+                        {{ i.singer |truncatewords:2}} </h6>
+                </div>
+                <!-- end box header  -->
+
+                <!-- box-body  -->
+                <div class="box_body text-center" style="margin-top: -.4rem;">
+                    <li><a href="{% url 'content' i.id %}">{{ i.title_name|truncatewords:4 }}</a></li>
+                </div>
+                <!-- end-box-body  -->
+            </div>
+            {% endfor %}
+
+            <div class="text-center  py-2 pt-3" style="background-color: #416f72;">
+                <a href="{% url 'section' %}" id="ymlt">
+                    <h4 class="" style="color: rgba(255, 255, 255, 0.87);">SEE MORE</h4>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% block script %}
+<script>
+</script>
+{% endblock %}
+{% endblock %}

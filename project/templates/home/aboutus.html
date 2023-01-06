@@ -1,0 +1,74 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block body %}
+
+<div class="container-fluid aboutus" style="background-color: white;">
+    <div class="col-12 d-flex flex-row mt-5 flex-wrap">
+        <div class="col-12 col-lg-2 px-1"></div>
+        <div class="col-12 aboutus_content col-lg-8 d-flexflex-column">
+            <p class="mt-4">
+            <h5> Hello and welcome to Chordian Family. </h5>
+            <p class="">
+            Our website is a type of website that provides the lyrics and chords to songs. These websites typically
+            have
+            a large
+            database
+            of lyrics and chords for a wide variety of songs, and we allow users to search for and view the lyrics
+            and chords to
+            specific songs.
+            We mainly focus on Nepali songs and we also post some of English, Hindi songs which are likely to be
+            played by guitar.
+            Many lyrics and chords websites also have additional features, such as the ability to view the lyrics
+            and
+            chords to formatting, or to view the lyrics and chords in different languages. Some lyrics and chords
+            websites may
+            also have other
+            types of content
+            related to music, such as artist biographies, music news, and music videos. It is important to note that
+            lyrics and
+            chords websites may only provide lyrics and chords for songs for which they have obtained the
+            appropriate licensing or
+            permission from
+            the
+            copyright holders.
+            </p>
+            <br>
+            <div class="col-12">
+                <span>
+                    <u style="font-family: Anton;" style="margin-top: 1rem;">
+                        If you have any query regrading Site, Advertisement and any other issue, please feel free to
+                        contact
+                        at
+                    </u>
+                    <span style="color: var(--primary-color); font-family: Anton; margin-top: -1px;">
+                        chordianfamily@gmail.com</span>
+                </span>
+            </div>
+            </p>
+        </div>
+
+        <div class="col-lg-2 mt-md-5 mt-3 col-12 px-1 popular_item">
+            <h2 class="text-center" style=" font-family: Anton; color: #416f72;">Popular
+                <hr>
+            </h2>
+            <!-- POPULAR -->
+            {% for i in popular %}
+            <li class="mb-3 px-3 pt-2" style="box-shadow: 1px 1px 1px rgba(128, 128, 128, 0.411);">
+                <div class="text-center ymlt_container">
+                    <a href="{% url 'content' i.id %}" id="ymlt">
+                        <h1 class="fw-bold py-2" style="background-color:#416f72; color: white;">{{ i.title_name |truncatewords:3}} -</h1> <span
+                            class="text-capitalize">{{ i.singer }}</span>
+                    </a>
+                    <hr>
+                </div>
+            </li>
+            {% endfor %}
+            <div class="text-center  py-2 pt-3" style="background-color: #416f72;">
+                <a href="{% url 'section' %}" id="ymlt">
+                    <h4 class="" style="color: rgba(255, 255, 255, 0.87);">SEE MORE</h4>
+                </a>
+            </div>
+        
+        </div>
+</div>
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block body %}
+<div class="container-fluid">
+    <div class="col-12 mt-5 d-flex flex-wrap px-3">
+        <!-- lEFT COL  -->
+    <div class="col-md-4 col-12 d-flex flex-column">
+        <div class="trending_section_header mt-md-0 mt-5">
+            <h3> TRENDING
+                <hr>
+            </h3>
+        </div>
+        <div class="trending_section_body overflow-scroll" style="height: 40rem;">
+            {% for i in trending_section %}
+            <div class="trending_section_body bg-light m-3"
+                style="box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.39); background-color: rgb(255, 255, 255) !important;">
+                <!-- box-header  -->
+                <h1 class="text-center box_header py-2 pt-2 fw-bold" style="background-color: #416f72; color: white; ">
+                    {{ i.title_name |truncatewords:7 }} <span class="fw-bold">-</span> <span class="text-capitalize">
+                        {{ i.singer |truncatewords:4}}</span>
+                </h1>
+                <hr class="w-100" style="margin-top: -.4rem;">
+                <div class="box_body pb-2 text-center">
+                    <li><a href="" style="padding-right:5rem" class="text-lowercase">
+                            {{ i.html_description|truncatewords:7 }}</a></li>
+                </div>
+            </div>
+            {% endfor %}
+    
+        </div>
+    </div>
+        <!-- MID COL  -->
+        <div class="col-md-4 col-12 d-flex flex-column">
+            <div class="popular_section_header mt-md-0 mt-5">
+                <h3> POPULAR
+                    <hr>
+                </h3>
+            </div>
+            <div class="popular_section_body overflow-scroll" style="height: 40rem;">
+                {% for i in popular_section %}
+                <div class="popular_section_body bg-light m-3"
+                    style="box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.39); background-color: rgb(255, 255, 255) !important;">
+                    <!-- box-header  -->
+                    <h1 class="text-center box_header py-2 pt-2 fw-bold"
+                        style="background-color: #416f72; color: white; ">
+                        {{ i.title_name |truncatewords:7 }} <span class="fw-bold">-</span> <span
+                            class="text-capitalize">
+                            {{ i.singer |truncatewords:4}}</span>
+                    </h1>
+                    <hr class="w-100" style="margin-top: -.4rem;">
+                    <div class="box_body pb-2 text-center">
+                        <li><a href="" style="padding-right:5rem" class="text-lowercase">
+                                {{ i.html_description|truncatewords:7 }}</a></li>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- RIGHT COL  -->
+    <div class="col-md-4 col-12 d-flex flex-column">
+        <div class="popular_section_header mt-md-0 mt-5">
+            <h3> YOU MAY LIKE THIS
+                <hr>
+            </h3>
+        </div>
+        <div class="popular_section_body overflow-scroll" style="height: 40rem;">
+            {% for i in ymlt_section %}
+            <div class="popular_section_body bg-light m-3"
+                style="box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.39); background-color: rgb(255, 255, 255) !important;">
+                <!-- box-header  -->
+                <h1 class="text-center box_header py-2 pt-2 fw-bold" style="background-color: #416f72; color: white; ">
+                    {{ i.title_name |truncatewords:7 }} <span class="fw-bold">-</span> <span class="text-capitalize">
+                        {{ i.singer |truncatewords:4}}</span>
+                </h1>
+                <hr class="w-100" style="margin-top: -.4rem;">
+                <div class="box_body pb-2 text-center">
+                    <li><a href="" style="padding-right:5rem" class="text-lowercase">
+                            {{ i.html_description|truncatewords:7 }}</a></li>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    </div>
+</div>
+{% endblock %}

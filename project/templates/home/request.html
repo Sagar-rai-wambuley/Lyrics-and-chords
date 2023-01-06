@@ -1,0 +1,73 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block head %}
+<head>
+    <style>
+
+    </style>
+</head>
+{% endblock %}
+{% block body %}
+<div class="container-fluid mt-3">
+    <div class="col-12 d-flex flex-row justify-content-between flex-wrap">
+        <!-- LEFT COL  -->
+        <div class="col-lg-7 col-12 px-1">
+            <form class="px-5 py-3 pt-5" style="box-shadow: 3px 3px 9px gainsboro; background-color: #ffffff7e;" 
+            action="{% url 'request' %}" method="POST">
+            {% csrf_token %}
+                <div class="mb-3">
+                    <label for="exampleInputName" class="form-label">Name</label>
+                    <input type="" name="name" class="form-control" id="exampleInputName" placeholder="Enter Your Name" required>
+                </div>
+    
+                <div class="mb-3">
+                    <label for="exampleInputrequest" class="form-label">Request song</label>
+                    <textarea type="" name="requestsong" class="form-control" style="height: 10rem;" placeholder="Request your song...."  id="exampleInputrequest" required></textarea>
+                </div>
+
+                <button type="submit" class="btn" style="background-color: #416f72; color: white;">Submit</button>
+                {% if req_suc %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong> Congratulation! </strong> {{ req_suc }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endif %}
+
+            </form>
+        </div>
+
+
+
+
+
+
+
+        <!-- RIGHT COL  -->
+        <hr class="d-lg-none d-block w-100">
+        <div class="col-lg-4 col-12 mt-4 mt-lg-0 px-3 px-lg-0">
+            <div class="col-12 " style="box-shadow: 3px 3px 9px gainsboro;">
+                <!-- Top  -->
+                <div class="col-12 ">
+                <h3 class="text-center py-4" style="color: #ffffff; background-color: #416f72;">REQUESTED
+                    SONG
+                </h3>
+                </div>
+                <!-- REQUESTSHOW  -->
+                <div class="col-12 px-1 request_container">
+                    {% for i in requested_data %}
+                    <hr>
+                    <span class="d-flex flex-row mt-2 pt-2 pb-2 shadow">
+                        <span class="d-flex flex-row py-3">
+                        <i class="fa-solid fa-user ms-3" style="color: rgb(0, 0, 0);"></i>
+                            <h6 class="ms-2 my-auto" style="font-weight: 500; color: #416f72;">{{ i.name }} : </h6>
+                        </span>
+                        <p class="px-2 my-auto ms-1"> {{ i.request_song }}</p>
+                    </span>
+                    {% endfor %}
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+ 
+{% endblock %}

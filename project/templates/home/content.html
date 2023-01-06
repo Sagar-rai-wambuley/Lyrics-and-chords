@@ -1,0 +1,117 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block head %}
+<title>{{ single_content.html_title_keyword }}</title>
+<meta name="description" content="{{ single_content.html_description }}">
+<meta http-equiv="refresh" content="600; url={% url 'home' %}">
+{% endblock %}
+{% block body %}
+<div class="container-fluid bg-light mt-4">
+
+    <div class="col-12 d-flex justify-content-between flex-wrap">
+        <!-- LEFT_COL -->
+        <div class="col-12 col-md-2 px-1 left_column  mt-2 mt-lg-0">
+        </div>
+
+        <!-- MID COL -->
+        <div class="col-12 col-md-8 px-2 mid_column mt-3 mt-lg-2">
+            <h1 class="py-2 ms-2 text-uppercase toptitle" style="font-family: Anton; color:#416f72; ">
+                    {{ single_content.singer }}
+                    <hr>
+            </h1>
+            <!-- THUMNAIL FOR SMALL -->
+            <div class="row mx-auto mb-5 d-md-none" id="small_thumnail">
+                <p class="small_thumnail_container d-flex flex-column justify-content-center align-items-center"
+                    style="position: absolute; font-family: Anton; width: 93%;">
+                    <span class="small_thumnail_name text-uppercase" style="color: #7fdae0;">
+                        {{ single_content.singer }}</span>
+                    <span class="small_thumnail_subname" style="color: rgba(255, 255, 255, 0.808);">
+                        {{ single_content.title_name }}</span>
+                </p>
+                <img class="img-fluid " id="small_thumnail_image"
+                    src="https://scontent.fktm2-1.fna.fbcdn.net/v/t39.30808-6/322404248_1250232795558950_7800543584497405762_n.jpg?stp=dst-jpg_p180x540&_nc_cat=103&ccb=1-7&_nc_sid=730e14&_nc_ohc=JeI4pocDdtAAX_Stupv&tn=qSdJ_G2j0ksiyBf3&_nc_ht=scontent.fktm2-1.fna&oh=00_AfC9746sEY9omrzGUbItG-TMTuE8Y9FdqsjVx_rpMmt47A&oe=63BA48B7"
+                    alt="{{ single_content.html_title_keyword }} ">
+
+            </div>
+            <!-- THUMNAIL FOR LARGE -->
+            <div class="row mx-auto mb-5 d-none d-md-block" id="large_thumnail" style="position: relative;">
+                <p class="large_thumnail_container d-flex flex-column justify-content-center align-items-center"
+                    style="position: absolute; font-family: Anton;">
+                    <span class="large_thumnail_name text-uppercase" style=" color: #7fdae0;">
+                        {{ single_content.singer }}</span>
+                    <span style="color: rgba(255, 255, 255, 0.808)"> {{ single_content.title_name }}</span>
+                </p>
+                <img class="img-fluid" id="large_thumnail_image"
+                    src="https://scontent.fktm2-1.fna.fbcdn.net/v/t39.30808-6/322404248_1250232795558950_7800543584497405762_n.jpg?stp=dst-jpg_p180x540&_nc_cat=103&ccb=1-7&_nc_sid=730e14&_nc_ohc=JeI4pocDdtAAX_Stupv&tn=qSdJ_G2j0ksiyBf3&_nc_ht=scontent.fktm2-1.fna&oh=00_AfC9746sEY9omrzGUbItG-TMTuE8Y9FdqsjVx_rpMmt47A&oe=63BA48B7"
+                    alt="{{ single_content.html_title_keyword }} ">
+
+            </div>
+            <!-- MID COLUMN HEADER  -->
+            <div class=" mid_column_header d-flex flex-row">
+
+                <div class="col-8 lyrics_header">
+                    <h1 class="ms-2 ms-lg-5 me-5 text-capitalize" style=" font-family: Anton;">
+                        {{ single_content.title_name | truncatewords:4}} - {{ single_content.singer |truncatewords:3 }}
+                    </h1>
+                </div>
+
+                <div class="col-4">
+                    <button type="button" style="background-color: rgb(50, 87, 52); color: rgb(226, 226, 226);"
+                        id="scroll" onclick="startScrolling()"> Scroll</button>
+                    <a href=""><button style="background-color: rgb(99, 3, 3); color: rgb(226, 225, 225); z-index: 1;"
+                            id="stop">Reset</button></a>
+                </div>
+            </div>
+
+            <hr class="content_hr">
+            <!-- MID COL BODY   MAIN CONTENT -->
+            <div class="mid_column_body px-2 ms-1 ms-lg-5" style="color: rgba(0, 0, 0, 0.938); ">
+                <div class="col-12 content">
+                    {{ single_content.content |safe }}
+                </div>
+
+                <hr>
+                <!-- ABOUT  -->
+                <div class="col-12  pb-1">
+                    <div class="about border mt-3">
+                        <h1 class="py-2 pt-4 ms-4" style="color: #416f72;">{{ single_content.title_name }} By <span
+                                class="fw-bold text-capitalize">
+                                {{ single_content.singer }}</span>
+                            <hr class="w-75">
+                        </h1>
+                        <div class="about_body px-4 text-lowercase" id="about_body" style="margin-top: -1rem; color: #416f72e3;">
+                            {{ single_content.about }}...
+                            <br>
+                            <b class="float-end text-capitalize" style="margin-right:11rem; color: #416f72;">Thank you</b>
+                            <br>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- MID COL END -->
+
+        <!-- RIGHT COLUMN  -->
+        <div class="col-12 col-md-2 px-1 right_column mt-3 mt-lg-2">
+            <h2 class="text-center" style=" font-family: Anton; color: #416f72;">You May Like This
+                <hr>
+            </h2>
+            <!-- FOR YOU MAY LIKE THIS CATEGORY  -->
+            {% for i in YMLT_section %}
+            <li class="mb-3 px-3 pt-2" style="box-shadow: 1px 1px 1px rgba(128, 128, 128, 0.411);">
+                <div class="text-center ymlt_container">
+                    <a href="{% url 'content' i.id %}" id="ymlt">
+                        <h1 class="fw-bold box_body py-2" style="color:#ffffff; background-color: #416f72;">{{ i.title_name |truncatewords:3}} -</h1> <span
+                            class="text-capitalize">{{ i.singer }}</span>
+                    </a>
+                    <hr>
+                </div>
+            </li>
+            {% endfor %}
+
+
+        </div>
+    </div>
+</div>
+{% endblock %}
